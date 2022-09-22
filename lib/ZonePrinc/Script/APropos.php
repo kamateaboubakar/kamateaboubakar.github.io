@@ -14,6 +14,7 @@ class APropos extends Script
 		$ctn .= '<div align="center">' ;
 		$ctn .= '<p style = "color: green">'.\Rpa2p\Config\Application::NOM.'<br>  v'.\Rpa2p\Config\Application::VERSION.'</p>' ;
 		$ctn .= '<br>' ;
+		$ctn .= '<p>Soluci RPA Manager</p>' ;
 		$ctn .= '<p>Copyright@2022 (SNT) Soluci Nouvelle Technologie</p>' ;
 		$ctn .= '</div>' ;
 		return $ctn ;
