@@ -102,8 +102,13 @@ text-align: center;
 		$ctn .= '</div>
 </div>
 <br>'.PHP_EOL ;
-		// Barre de menu
-		$ctn .= '<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+
+
+// Barre de menu
+
+
+		$ctn .= '<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FF7800; border-radius:30px;">
 <div class="container-fluid">
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span>
@@ -111,14 +116,18 @@ text-align: center;
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 <li class="nav-item">
-  <a class="nav-link active" aria-current="page" href="?"><i class="fa fa-home">Tableau de bord</i></a>
-</li>' ;
+  <a class="nav-link" aria-current="page" href="#" style="color: #ffffff; font-size:20px;">Accueil</i></a>
+</li>
+' ;
 	if($zone->SurScriptConnecte())
 	{
 		if($zone->PossedePrivilege("consult_execs"))
 		{
+			$ctn .= '<li class="nav-item">
+  <a class="nav-link active" aria-current="page" href="?" style="color: #ffffff; font-size:20px;"> Tableau de bord</i></a>
+</li>';
 			$ctn .= '<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a class="nav-link dropdown-toggle" style="color: #ffffff; font-size:20px;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 	Suivi
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">' ;
@@ -135,7 +144,7 @@ text-align: center;
 		if($zone->PossedePrivileges(array("gestion_jobs", "exec_jobs")))
 		{
 			$ctn .= '<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a class="nav-link dropdown-toggle" style="color: #ffffff; font-size:20px;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 	Jobs
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -150,7 +159,7 @@ text-align: center;
 		if($zone->PossedePrivilege("gestion_references"))
 		{
 			$ctn .= '<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a class="nav-link dropdown-toggle" style="color: #ffffff; font-size:20px;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 	Références
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -184,7 +193,7 @@ text-align: center;
 		if($zone->EditMembresPossible() || $zone->EditMembershipPossible())
 		{
 			$ctn .= '<li class="nav-item dropdown">
-	  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	  <a class="nav-link dropdown-toggle" style="color: #ffffff; font-size:20px;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 		Authentification
 	  </a>
 	  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -210,7 +219,7 @@ text-align: center;
 		}
 	}
 	$ctn .= '<li class="nav-item dropdown">
-  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color: #ffffff; font-size:20px;" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 	Aide
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -226,7 +235,11 @@ text-align: center;
 </div>
 </div>
 </nav>' ;
+
+
 		// Fin Barre de menu
+
+
 		$ctn .= '<div class="row">
 <div class="col">' ;
 		return $ctn ;
