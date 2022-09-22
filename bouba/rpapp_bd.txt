@@ -1,0 +1,833 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le : lun. 19 sep. 2022 à 09:39
+-- Version du serveur : 10.5.13-MariaDB
+-- Version de PHP : 7.4.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `rpapp`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_activite`
+--
+
+DROP TABLE IF EXISTS `rpapp_activite`;
+CREATE TABLE IF NOT EXISTS `rpapp_activite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_job` smallint(6) NOT NULL,
+  `type_activite` varchar(30) DEFAULT 'robotframework',
+  `titre` varchar(255) NOT NULL,
+  `id_environnement` tinyint(4) NOT NULL,
+  `id_membre_creation` int(11) NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id_membre_modif` int(11) NOT NULL,
+  `date_modif` datetime NOT NULL DEFAULT current_timestamp(),
+  `actif` tinyint(1) NOT NULL DEFAULT 1,
+  `statut_dern_exec` tinyint(1) NOT NULL DEFAULT -1,
+  `msg_dern_exec` varchar(1000) NOT NULL DEFAULT '',
+  `date_dern_exec` datetime DEFAULT NULL,
+  `param01_activite` varchar(500) NOT NULL DEFAULT '',
+  `param02_activite` varchar(500) NOT NULL DEFAULT '',
+  `param03_activite` varchar(500) NOT NULL DEFAULT '',
+  `param04_activite` varchar(500) NOT NULL DEFAULT '',
+  `param05_activite` varchar(500) NOT NULL DEFAULT '',
+  `param06_activite` varchar(500) NOT NULL DEFAULT '',
+  `param07_activite` varchar(500) NOT NULL DEFAULT '',
+  `param08_activite` varchar(500) NOT NULL DEFAULT '',
+  `param09_activite` varchar(500) NOT NULL DEFAULT '',
+  `param10_activite` varchar(500) NOT NULL DEFAULT '',
+  `param11_activite` varchar(500) NOT NULL DEFAULT '',
+  `param12_activite` varchar(500) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `id_environnement` (`id_environnement`),
+  KEY `id_job` (`id_job`),
+  KEY `actif` (`actif`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_ad_server`
+--
+
+DROP TABLE IF EXISTS `rpapp_ad_server`;
+CREATE TABLE IF NOT EXISTS `rpapp_ad_server` (
+  `id` int(4) NOT NULL AUTO_INCREMENT,
+  `host` varchar(30) NOT NULL,
+  `port` int(5) NOT NULL,
+  `domain` varchar(30) NOT NULL,
+  `dn` varchar(120) DEFAULT NULL,
+  `use_protocol_v3` char(1) NOT NULL DEFAULT '1',
+  `follow_referrals` char(1) NOT NULL DEFAULT '1',
+  `active` char(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_application`
+--
+
+DROP TABLE IF EXISTS `rpapp_application`;
+CREATE TABLE IF NOT EXISTS `rpapp_application` (
+  `id` smallint(6) NOT NULL AUTO_INCREMENT,
+  `reference_app` varchar(20) NOT NULL,
+  `titre` varchar(100) NOT NULL,
+  `description` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `code` (`reference_app`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `rpapp_application`
+--
+
+INSERT INTO `rpapp_application` (`id`, `reference_app`, `titre`, `description`) VALUES
+(1, 'localhost', 'Localhost', 'Application Locale'),
+(2, 'ezv', 'Easyvista', 'Gestion des demandes et incidents SI'),
+(3, 'sv3_sodeci', 'SV3 SODECI', 'Saphir V3 SODECI'),
+(4, 'sara_sod', 'SARA SODECI', ''),
+(5, 'jade_cie', 'JADE CIE', '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_arch_exec_activite`
+--
+
+DROP TABLE IF EXISTS `rpapp_arch_exec_activite`;
+CREATE TABLE IF NOT EXISTS `rpapp_arch_exec_activite` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `id_exec_job` int(11) NOT NULL,
+  `id_job` smallint(6) NOT NULL,
+  `id_activite` mediumint(9) NOT NULL,
+  `date_debut` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_fin` datetime NOT NULL,
+  `total_succes` tinyint(4) NOT NULL,
+  `total_echecs` tinyint(4) NOT NULL,
+  `contenu_brut` text DEFAULT NULL,
+  `delai` varchar(10) NOT NULL,
+  `statut` tinyint(1) NOT NULL DEFAULT 0,
+  `titre_activite` varchar(255) NOT NULL,
+  `nom_job` varchar(255) NOT NULL,
+  `id_application` smallint(6) NOT NULL,
+  `id_membre_creation` tinyint(4) NOT NULL,
+  `id_environnement` tinyint(4) NOT NULL,
+  `titre_environnement` varchar(50) NOT NULL,
+  `titre_application` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_arch_exec_job`
+--
+
+DROP TABLE IF EXISTS `rpapp_arch_exec_job`;
+CREATE TABLE IF NOT EXISTS `rpapp_arch_exec_job` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `id_job` smallint(6) NOT NULL,
+  `id_ctrl` varchar(30) NOT NULL DEFAULT '',
+  `date_debut` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_fin` datetime DEFAULT NULL,
+  `total_succes` tinyint(4) NOT NULL DEFAULT 0,
+  `total_echecs` tinyint(4) NOT NULL DEFAULT 0,
+  `statut` tinyint(1) NOT NULL DEFAULT 0,
+  `id_planif` tinyint(4) NOT NULL DEFAULT 0,
+  `id_application` smallint(6) NOT NULL,
+  `nom_job` varchar(255) NOT NULL,
+  `id_membre_creation` tinyint(4) NOT NULL,
+  `reference_job` varchar(30) NOT NULL,
+  `titre_application` varchar(100) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_arch_info_planif`
+--
+
+DROP TABLE IF EXISTS `rpapp_arch_info_planif`;
+CREATE TABLE IF NOT EXISTS `rpapp_arch_info_planif` (
+  `date_action` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id_queue` int(11) NOT NULL,
+  `id_job` int(11) NOT NULL,
+  `nom_job` varchar(255) NOT NULL DEFAULT '',
+  `id_planif` int(11) NOT NULL,
+  `type_periode` varchar(30) NOT NULL DEFAULT 'jamais',
+  `type_notif` varchar(30) NOT NULL DEFAULT 'silencieux',
+  KEY `id_job` (`id_job`,`id_planif`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_consolide_job`
+--
+
+DROP TABLE IF EXISTS `rpapp_consolide_job`;
+CREATE TABLE IF NOT EXISTS `rpapp_consolide_job` (
+  `id_activite` int(11) NOT NULL,
+  `date_exec` datetime NOT NULL,
+  PRIMARY KEY (`id_activite`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_environnement`
+--
+
+DROP TABLE IF EXISTS `rpapp_environnement`;
+CREATE TABLE IF NOT EXISTS `rpapp_environnement` (
+  `id` tinyint(2) NOT NULL AUTO_INCREMENT,
+  `titre` varchar(50) NOT NULL,
+  `en_production` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `en_production` (`en_production`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `rpapp_environnement`
+--
+
+INSERT INTO `rpapp_environnement` (`id`, `titre`, `en_production`) VALUES
+(1, 'Recette', 0),
+(2, 'TNR', 0),
+(3, 'TIF', 0),
+(4, 'Archivage', 0),
+(5, 'Production', 1),
+(6, 'PRI', 1),
+(8, 'Préproduction', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_exec_activite`
+--
+
+DROP TABLE IF EXISTS `rpapp_exec_activite`;
+CREATE TABLE IF NOT EXISTS `rpapp_exec_activite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_exec_job` int(11) NOT NULL,
+  `id_job` smallint(6) NOT NULL,
+  `id_activite` mediumint(9) NOT NULL,
+  `date_debut` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_fin` datetime NOT NULL,
+  `total_succes` tinyint(4) NOT NULL,
+  `total_echecs` tinyint(4) NOT NULL,
+  `contenu_brut` text DEFAULT NULL,
+  `delai` varchar(10) NOT NULL,
+  `statut` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `id_job` (`id_job`)
+) ENGINE=MyISAM AUTO_INCREMENT=360 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_exec_activite_err`
+--
+
+DROP TABLE IF EXISTS `rpapp_exec_activite_err`;
+CREATE TABLE IF NOT EXISTS `rpapp_exec_activite_err` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_exec_job` int(11) NOT NULL,
+  `id_job` smallint(6) NOT NULL,
+  `id_activite` mediumint(9) NOT NULL,
+  `date_debut` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_fin` datetime NOT NULL,
+  `contenu_brut` text DEFAULT NULL,
+  `delai` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_job` (`id_job`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_exec_job`
+--
+
+DROP TABLE IF EXISTS `rpapp_exec_job`;
+CREATE TABLE IF NOT EXISTS `rpapp_exec_job` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_job` smallint(6) NOT NULL,
+  `id_ctrl` varchar(30) NOT NULL DEFAULT '',
+  `date_debut` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_fin` datetime DEFAULT NULL,
+  `total_succes` tinyint(4) NOT NULL DEFAULT 0,
+  `total_echecs` tinyint(4) NOT NULL DEFAULT 0,
+  `statut` tinyint(1) NOT NULL DEFAULT 0,
+  `id_planif` tinyint(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  KEY `id_job` (`id_job`)
+) ENGINE=MyISAM AUTO_INCREMENT=467 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_exec_queue_0`
+--
+
+DROP TABLE IF EXISTS `rpapp_exec_queue_0`;
+CREATE TABLE IF NOT EXISTS `rpapp_exec_queue_0` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `id_job` smallint(6) NOT NULL,
+  `type_activite` varchar(30) DEFAULT 'robotframework',
+  `titre` varchar(255) NOT NULL,
+  `id_environnement` tinyint(4) NOT NULL,
+  `id_membre_creation` int(11) NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id_membre_modif` int(11) NOT NULL,
+  `date_modif` datetime NOT NULL DEFAULT current_timestamp(),
+  `actif` tinyint(1) NOT NULL DEFAULT 1,
+  `statut_dern_exec` tinyint(1) NOT NULL DEFAULT -1,
+  `msg_dern_exec` varchar(1000) NOT NULL DEFAULT '',
+  `date_dern_exec` datetime DEFAULT NULL,
+  `param01_activite` varchar(500) NOT NULL DEFAULT '',
+  `param02_activite` varchar(500) NOT NULL DEFAULT '',
+  `param03_activite` varchar(500) NOT NULL DEFAULT '',
+  `param04_activite` varchar(500) NOT NULL DEFAULT '',
+  `param05_activite` varchar(500) NOT NULL DEFAULT '',
+  `param06_activite` varchar(500) NOT NULL DEFAULT '',
+  `param07_activite` varchar(500) NOT NULL DEFAULT '',
+  `param08_activite` varchar(500) NOT NULL DEFAULT '',
+  `param09_activite` varchar(500) NOT NULL DEFAULT '',
+  `param10_activite` varchar(500) NOT NULL DEFAULT '',
+  `param11_activite` varchar(500) NOT NULL DEFAULT '',
+  `param12_activite` varchar(500) NOT NULL DEFAULT '',
+  `id_planif` double DEFAULT NULL,
+  `id_planif_job` int(11) DEFAULT 1,
+  `titre_job` varchar(255) NOT NULL,
+  `type_periode` varchar(20) NOT NULL DEFAULT '',
+  `param1_periode` varchar(30) NOT NULL DEFAULT '',
+  `param2_periode` varchar(30) NOT NULL DEFAULT '',
+  `param3_periode` varchar(30) NOT NULL DEFAULT '',
+  `param4_periode` varchar(30) NOT NULL DEFAULT '',
+  `type_notif` varchar(20) NOT NULL DEFAULT 'aucun',
+  `param1_notif` varchar(500) NOT NULL DEFAULT '',
+  `param2_notif` varchar(500) NOT NULL DEFAULT '',
+  `param3_notif` varchar(500) NOT NULL DEFAULT '',
+  `param4_notif` varchar(500) NOT NULL DEFAULT '',
+  `titre_application` varchar(100) DEFAULT NULL,
+  KEY `id_planif` (`id_planif`),
+  KEY `id_job` (`id_job`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_exec_queue_1`
+--
+
+DROP TABLE IF EXISTS `rpapp_exec_queue_1`;
+CREATE TABLE IF NOT EXISTS `rpapp_exec_queue_1` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `id_job` smallint(6) NOT NULL,
+  `type_activite` varchar(30) DEFAULT 'robotframework',
+  `titre` varchar(255) NOT NULL,
+  `id_environnement` tinyint(4) NOT NULL,
+  `id_membre_creation` int(11) NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id_membre_modif` int(11) NOT NULL,
+  `date_modif` datetime NOT NULL DEFAULT current_timestamp(),
+  `actif` tinyint(1) NOT NULL DEFAULT 1,
+  `statut_dern_exec` tinyint(1) NOT NULL DEFAULT -1,
+  `msg_dern_exec` varchar(1000) NOT NULL DEFAULT '',
+  `date_dern_exec` datetime DEFAULT NULL,
+  `param01_activite` varchar(500) NOT NULL DEFAULT '',
+  `param02_activite` varchar(500) NOT NULL DEFAULT '',
+  `param03_activite` varchar(500) NOT NULL DEFAULT '',
+  `param04_activite` varchar(500) NOT NULL DEFAULT '',
+  `param05_activite` varchar(500) NOT NULL DEFAULT '',
+  `param06_activite` varchar(500) NOT NULL DEFAULT '',
+  `param07_activite` varchar(500) NOT NULL DEFAULT '',
+  `param08_activite` varchar(500) NOT NULL DEFAULT '',
+  `param09_activite` varchar(500) NOT NULL DEFAULT '',
+  `param10_activite` varchar(500) NOT NULL DEFAULT '',
+  `param11_activite` varchar(500) NOT NULL DEFAULT '',
+  `param12_activite` varchar(500) NOT NULL DEFAULT '',
+  `id_planif` int(1) DEFAULT NULL,
+  `id_planif_job` int(11) NOT NULL DEFAULT 0,
+  `titre_job` varchar(255) NOT NULL,
+  `type_periode` varchar(20) NOT NULL DEFAULT '',
+  `param1_periode` varchar(100) NOT NULL DEFAULT '',
+  `param2_periode` varchar(100) NOT NULL DEFAULT '',
+  `param3_periode` varchar(100) NOT NULL DEFAULT '',
+  `param4_periode` varchar(100) NOT NULL DEFAULT '',
+  `type_notif` varchar(20) NOT NULL DEFAULT 'aucun',
+  `param1_notif` varchar(500) NOT NULL DEFAULT '',
+  `param2_notif` varchar(500) NOT NULL DEFAULT '',
+  `param3_notif` varchar(500) NOT NULL DEFAULT '',
+  `param4_notif` varchar(500) NOT NULL DEFAULT '',
+  `titre_application` varchar(100),
+  KEY `id_job` (`id_job`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_exec_queue_2`
+--
+
+DROP TABLE IF EXISTS `rpapp_exec_queue_2`;
+CREATE TABLE IF NOT EXISTS `rpapp_exec_queue_2` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `id_job` smallint(6) NOT NULL,
+  `type_activite` varchar(30) DEFAULT 'robotframework',
+  `titre` varchar(255) NOT NULL,
+  `id_environnement` tinyint(4) NOT NULL,
+  `id_membre_creation` int(11) NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id_membre_modif` int(11) NOT NULL,
+  `date_modif` datetime NOT NULL DEFAULT current_timestamp(),
+  `actif` tinyint(1) NOT NULL DEFAULT 1,
+  `statut_dern_exec` tinyint(1) NOT NULL DEFAULT -1,
+  `msg_dern_exec` varchar(1000) NOT NULL DEFAULT '',
+  `date_dern_exec` datetime DEFAULT NULL,
+  `id_planif` int(1) DEFAULT NULL,
+  `id_planif_job` int(11) NOT NULL DEFAULT 0,
+  `titre_job` varchar(255) NOT NULL,
+  `type_periode` varchar(20) NOT NULL DEFAULT '',
+  `param1_periode` varchar(100) NOT NULL DEFAULT '',
+  `param2_periode` varchar(100) NOT NULL DEFAULT '',
+  `param3_periode` varchar(100) NOT NULL DEFAULT '',
+  `param4_periode` varchar(100) NOT NULL DEFAULT '',
+  `type_notif` varchar(20) NOT NULL DEFAULT 'aucun',
+  `param1_notif` varchar(500) NOT NULL DEFAULT '',
+  `param2_notif` varchar(500) NOT NULL DEFAULT '',
+  `param3_notif` varchar(500) NOT NULL DEFAULT '',
+  `param4_notif` varchar(500) NOT NULL DEFAULT '',
+  `titre_application` varchar(100),
+  KEY `id_job` (`id_job`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_exec_queue_3`
+--
+
+DROP TABLE IF EXISTS `rpapp_exec_queue_3`;
+CREATE TABLE IF NOT EXISTS `rpapp_exec_queue_3` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `id_job` smallint(6) NOT NULL,
+  `type_activite` varchar(30) DEFAULT 'robotframework',
+  `titre` varchar(255) NOT NULL,
+  `id_environnement` tinyint(4) NOT NULL,
+  `id_membre_creation` int(11) NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id_membre_modif` int(11) NOT NULL,
+  `date_modif` datetime NOT NULL DEFAULT current_timestamp(),
+  `actif` tinyint(1) NOT NULL DEFAULT 1,
+  `statut_dern_exec` tinyint(1) NOT NULL DEFAULT -1,
+  `msg_dern_exec` varchar(1000) NOT NULL DEFAULT '',
+  `date_dern_exec` datetime DEFAULT NULL,
+  `id_planif` int(1) DEFAULT NULL,
+  `id_planif_job` int(11) NOT NULL DEFAULT 0,
+  `titre_job` varchar(255) NOT NULL,
+  `type_periode` varchar(20) NOT NULL DEFAULT '',
+  `param1_periode` varchar(100) NOT NULL DEFAULT '',
+  `param2_periode` varchar(100) NOT NULL DEFAULT '',
+  `param3_periode` varchar(100) NOT NULL DEFAULT '',
+  `param4_periode` varchar(100) NOT NULL DEFAULT '',
+  `type_notif` varchar(20) NOT NULL DEFAULT 'aucun',
+  `param1_notif` varchar(500) NOT NULL DEFAULT '',
+  `param2_notif` varchar(500) NOT NULL DEFAULT '',
+  `param3_notif` varchar(500) NOT NULL DEFAULT '',
+  `param4_notif` varchar(500) NOT NULL DEFAULT '',
+  `titre_application` varchar(100),
+  KEY `id_job` (`id_job`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_exec_queue_4`
+--
+
+DROP TABLE IF EXISTS `rpapp_exec_queue_4`;
+CREATE TABLE IF NOT EXISTS `rpapp_exec_queue_4` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `id_job` smallint(6) NOT NULL,
+  `type_activite` varchar(30) DEFAULT 'robotframework',
+  `titre` varchar(255) NOT NULL,
+  `id_environnement` tinyint(4) NOT NULL,
+  `id_membre_creation` int(11) NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id_membre_modif` int(11) NOT NULL,
+  `date_modif` datetime NOT NULL DEFAULT current_timestamp(),
+  `actif` tinyint(1) NOT NULL DEFAULT 1,
+  `statut_dern_exec` tinyint(1) NOT NULL DEFAULT -1,
+  `msg_dern_exec` varchar(1000) NOT NULL DEFAULT '',
+  `date_dern_exec` datetime DEFAULT NULL,
+  `id_planif` int(11) DEFAULT NULL,
+  `id_planif_job` int(11) NOT NULL DEFAULT 0,
+  `titre_job` varchar(255) NOT NULL,
+  `type_periode` varchar(20) NOT NULL DEFAULT '',
+  `param1_periode` varchar(100) NOT NULL DEFAULT '',
+  `param2_periode` varchar(100) NOT NULL DEFAULT '',
+  `param3_periode` varchar(100) NOT NULL DEFAULT '',
+  `param4_periode` varchar(100) NOT NULL DEFAULT '',
+  `type_notif` varchar(20) NOT NULL DEFAULT 'aucun',
+  `param1_notif` varchar(500) NOT NULL DEFAULT '',
+  `param2_notif` varchar(500) NOT NULL DEFAULT '',
+  `param3_notif` varchar(500) NOT NULL DEFAULT '',
+  `param4_notif` varchar(500) NOT NULL DEFAULT '',
+  `titre_application` varchar(100),
+  KEY `id_job` (`id_job`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_info_exec_activite`
+--
+
+DROP TABLE IF EXISTS `rpapp_info_exec_activite`;
+CREATE TABLE IF NOT EXISTS `rpapp_info_exec_activite` (
+  `id_exec_activite` int(11) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `id_exec_job` int(11) NOT NULL,
+  `id_activite` int(11) NOT NULL,
+  `valeur` varchar(100) NOT NULL,
+  `niveau_alerte` varchar(20) NOT NULL DEFAULT 'success',
+  `date_action` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id_exec_activite`,`nom`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_info_planif`
+--
+
+DROP TABLE IF EXISTS `rpapp_info_planif`;
+CREATE TABLE IF NOT EXISTS `rpapp_info_planif` (
+  `date_action` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id_queue` int(11) NOT NULL,
+  `id_job` int(11) NOT NULL,
+  `nom_job` varchar(255) NOT NULL DEFAULT '',
+  `id_planif` int(11) NOT NULL,
+  `type_periode` varchar(30) NOT NULL DEFAULT 'jamais',
+  `type_notif` varchar(30) NOT NULL DEFAULT 'silencieux',
+  KEY `id_job` (`id_job`,`id_planif`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_job`
+--
+
+DROP TABLE IF EXISTS `rpapp_job`;
+CREATE TABLE IF NOT EXISTS `rpapp_job` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_application` smallint(6) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL DEFAULT '',
+  `reference_job` varchar(30) NOT NULL,
+  `id_membre_creation` tinyint(4) NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id_membre_modif` int(11) NOT NULL,
+  `date_modif` datetime NOT NULL,
+  `actif` tinyint(1) NOT NULL DEFAULT 1,
+  `statut_dern_exec` tinyint(1) NOT NULL DEFAULT 1,
+  `msg_dern_exec` varchar(5000) NOT NULL DEFAULT '',
+  `date_dern_exec` datetime DEFAULT NULL,
+  `succes_dern_exec` smallint(4) NOT NULL DEFAULT 0,
+  `echec_dern_exec` smallint(4) NOT NULL DEFAULT 0,
+  `date_exec_jour` datetime DEFAULT NULL,
+  `succes_exec_jour` tinyint(3) NOT NULL DEFAULT 0,
+  `echec_exec_jour` tinyint(3) NOT NULL DEFAULT 0,
+  `succes_exec_total` mediumint(9) NOT NULL DEFAULT 0,
+  `echec_exec_total` mediumint(9) NOT NULL DEFAULT 0,
+  `id_dern_exec` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `reference_job` (`reference_job`),
+  KEY `id_application` (`id_application`),
+  KEY `actif` (`actif`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_member`
+--
+
+DROP TABLE IF EXISTS `rpapp_member`;
+CREATE TABLE IF NOT EXISTS `rpapp_member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login_member` varchar(30) NOT NULL,
+  `password_member` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `contact` varchar(255) DEFAULT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT 1,
+  `ad_activated` tinyint(1) NOT NULL DEFAULT 0,
+  `profile_id` int(5) NOT NULL,
+  `ad_server_id` int(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `rpapp_member`
+--
+
+INSERT INTO `rpapp_member` (`id`, `login_member`, `password_member`, `email`, `first_name`, `last_name`, `address`, `contact`, `enabled`, `ad_activated`, `profile_id`, `ad_server_id`) VALUES
+(1, 'root', '*0B0A27832C339662F96E0238AD92FCBCB992A7EA', 'root@localhost', 'Super', 'Administrateur', '', '', 1, 0, 1, 0),
+(2, 'guest', '*B2D2B0D806856242A0B2A81833310AC53F0EEB0B', 'guest@monsite.com', 'Invité', 'Utilisateur', '', '', 1, 0, 2, 1),
+(3, 'alhassane.keita', NULL, 'alhassane.keita@gs2e.ci', 'Alhassane', 'KEITA', NULL, NULL, 1, 1, 1, 1),
+(4, 'consultant1', '*309E593D56428395A06EFEC14296AC113CBB1261', 'consultant1@gs2e.ci', 'Agent', 'Consultant 1', '', '', 1, 0, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_planif_job`
+--
+
+DROP TABLE IF EXISTS `rpapp_planif_job`;
+CREATE TABLE IF NOT EXISTS `rpapp_planif_job` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_job` int(11) NOT NULL,
+  `type_periode` varchar(20) NOT NULL DEFAULT '',
+  `param1_periode` varchar(100) NOT NULL DEFAULT '',
+  `param2_periode` varchar(100) NOT NULL DEFAULT '',
+  `param3_periode` varchar(100) NOT NULL DEFAULT '',
+  `param4_periode` varchar(100) NOT NULL DEFAULT '',
+  `type_notif` varchar(20) NOT NULL DEFAULT 'aucun',
+  `param1_notif` varchar(500) NOT NULL DEFAULT '',
+  `param2_notif` varchar(500) NOT NULL DEFAULT '',
+  `param3_notif` varchar(500) NOT NULL DEFAULT '',
+  `param4_notif` varchar(500) NOT NULL DEFAULT '',
+  `actif` tinyint(1) DEFAULT 1,
+  `niveau_alerte` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_privilege`
+--
+
+DROP TABLE IF EXISTS `rpapp_privilege`;
+CREATE TABLE IF NOT EXISTS `rpapp_privilege` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `profile_id` int(5) NOT NULL,
+  `role_id` int(5) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `rpapp_privilege`
+--
+
+INSERT INTO `rpapp_privilege` (`id`, `profile_id`, `role_id`, `active`) VALUES
+(1, 1, 1, 1),
+(2, 1, 2, 0),
+(3, 2, 1, 0),
+(4, 2, 2, 1),
+(5, 3, 1, 0),
+(6, 3, 2, 0),
+(7, 1, 3, 1),
+(8, 2, 3, 0),
+(9, 3, 3, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_profile`
+--
+
+DROP TABLE IF EXISTS `rpapp_profile`;
+CREATE TABLE IF NOT EXISTS `rpapp_profile` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `rpapp_profile`
+--
+
+INSERT INTO `rpapp_profile` (`id`, `title`, `description`, `enabled`) VALUES
+(1, 'Super administrateur', '', 1),
+(2, 'Utilisateur invite', '', 1),
+(3, 'Consultant', '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_propriete`
+--
+
+DROP TABLE IF EXISTS `rpapp_propriete`;
+CREATE TABLE IF NOT EXISTS `rpapp_propriete` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(100) NOT NULL,
+  `description` varchar(500) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `nom_unique` (`nom`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `rpapp_propriete`
+--
+
+INSERT INTO `rpapp_propriete` (`id`, `nom`, `description`) VALUES
+(1, 'Propriétaire', ''),
+(2, 'Client', ''),
+(3, 'Responsable Exploitation', ''),
+(4, 'Responsable Etudes', ''),
+(5, 'Manager Exploitation', '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_propriete_job`
+--
+
+DROP TABLE IF EXISTS `rpapp_propriete_job`;
+CREATE TABLE IF NOT EXISTS `rpapp_propriete_job` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_job` int(11) NOT NULL,
+  `id_propriete` int(11) NOT NULL,
+  `valeur` varchar(200) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_queue_non_demar`
+--
+
+DROP TABLE IF EXISTS `rpapp_queue_non_demar`;
+CREATE TABLE IF NOT EXISTS `rpapp_queue_non_demar` (
+  `id_job` smallint(6) NOT NULL DEFAULT 0,
+  `id_planif` int(11) DEFAULT NULL,
+  `id_planif_job` int(11) NOT NULL DEFAULT 0,
+  `date_planif` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_role`
+--
+
+DROP TABLE IF EXISTS `rpapp_role`;
+CREATE TABLE IF NOT EXISTS `rpapp_role` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `rpapp_role`
+--
+
+INSERT INTO `rpapp_role` (`id`, `name`, `title`, `description`, `enabled`) VALUES
+(1, 'super_admin', 'Super administrateur', 'Acces ? tout sur l\'application', 1),
+(2, 'invite', 'Invite', 'Acces aux fonctionnalites qu\'un invite aurait acces.', 1),
+(3, 'consulte_clients', 'Peut consulter les clients', '', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_tache_activite`
+--
+
+DROP TABLE IF EXISTS `rpapp_tache_activite`;
+CREATE TABLE IF NOT EXISTS `rpapp_tache_activite` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `id_job` smallint(6) NOT NULL,
+  `type_activite` varchar(30) DEFAULT 'robotframework',
+  `titre` varchar(255) NOT NULL,
+  `id_environnement` tinyint(4) NOT NULL,
+  `id_membre_creation` int(11) NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
+  `id_membre_modif` int(11) NOT NULL,
+  `date_modif` datetime NOT NULL DEFAULT current_timestamp(),
+  `actif` tinyint(1) NOT NULL DEFAULT 1,
+  `statut_dern_exec` tinyint(1) NOT NULL DEFAULT -1,
+  `msg_dern_exec` varchar(1000) NOT NULL DEFAULT '',
+  `date_dern_exec` datetime DEFAULT NULL,
+  `id_planif` int(1) DEFAULT NULL,
+  `id_planif_job` int(11) NOT NULL DEFAULT 0,
+  `titre_job` varchar(255) NOT NULL,
+  `type_periode` varchar(20) NOT NULL DEFAULT '',
+  `param1_periode` varchar(100) NOT NULL DEFAULT '',
+  `param2_periode` varchar(100) NOT NULL DEFAULT '',
+  `param3_periode` varchar(100) NOT NULL DEFAULT '',
+  `param4_periode` varchar(100) NOT NULL DEFAULT '',
+  `type_notif` varchar(20) NOT NULL DEFAULT 'aucun',
+  `param1_notif` varchar(500) NOT NULL DEFAULT '',
+  `param2_notif` varchar(500) NOT NULL DEFAULT '',
+  `param3_notif` varchar(500) NOT NULL DEFAULT '',
+  `param4_notif` varchar(500) NOT NULL DEFAULT '',
+  `titre_application` varchar(100),
+  KEY `id_planif` (`id_planif`),
+  KEY `id_job` (`id_job`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_tache_job`
+--
+
+DROP TABLE IF EXISTS `rpapp_tache_job`;
+CREATE TABLE IF NOT EXISTS `rpapp_tache_job` (
+  `id_planif` int(1) DEFAULT NULL,
+  `id_job` smallint(6) NOT NULL,
+  `id_planif_job` int(11) NOT NULL DEFAULT 0,
+  KEY `id_job` (`id_job`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rpapp_variable`
+--
+
+DROP TABLE IF EXISTS `rpapp_variable`;
+CREATE TABLE IF NOT EXISTS `rpapp_variable` (
+  `nom` varchar(255) NOT NULL,
+  `valeur` varchar(2000) NOT NULL,
+  `description` varchar(120) NOT NULL DEFAULT '',
+  `crypter` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`nom`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
