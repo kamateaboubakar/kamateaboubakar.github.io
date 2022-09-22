@@ -67,7 +67,7 @@ end",
 		background-size: 200% auto;
 		color: white;
 		box-shadow: 0 0 20px #eee;
-		border-radius: 30px;">Jobs</i></a>' ;
+		border-radius: 30px;">Les Jobs</i></a>' ;
 		$ctn .= '&nbsp;' ;
 		$ctn .= '<a class="btn btn-2 " href="?appelleScript=listeEnvs" style = "  
 		background-image: linear-gradient(to left, orange 0%, red 51%, orange 100%);
