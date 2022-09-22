@@ -56,7 +56,7 @@ end",
 		$ctn .= '<div class="card">' ;
 		$ctn .= '<div class="card-body text-center">' ;
 		$ctn .= '<a class="btn btn-1 " href="?appelleScript=listeJobs" style = "  
-		background-image: linear-gradient(to right, orange 0%, red 51%, orange 100%);
+		background-image: linear-gradient(to left, #FF7800 0%, red 51%, #FF7800 100%);
 		background-position: right center;
 		flex: 1 1 auto;
 		margin: 10px;
@@ -70,7 +70,7 @@ end",
 		border-radius: 30px;">Les-Jobs</i></a>' ;
 		$ctn .= '&nbsp;' ;
 		$ctn .= '<a class="btn btn-2 " href="?appelleScript=listeEnvs" style = "  
-		background-image: linear-gradient(to left, orange 0%, red 51%, orange 100%);
+		background-image: linear-gradient(to left, #FF7800 0%, red 51%, #FF7800 100%);
 		background-position: left center;
 		flex: 1 1 auto;
 		margin: 10px;
@@ -84,7 +84,7 @@ end",
 		border-radius: 30px;">Environnements</i></a>' ;
 		$ctn .= '&nbsp;' ;
 		$ctn .= '<a class="btn btn-3  " href="?appelleScript=listeApps" style = "  
-		background-image: linear-gradient(to right, orange 0%, red 51%, orange 100%);
+		background-image: linear-gradient(to left, #FF7800 0%, red 51%, #FF7800 100%);
 		background-position: right center;
 		flex: 1 1 auto;
 		margin: 10px;
@@ -98,7 +98,7 @@ end",
 		border-radius: 30px;">Applications</i></a>' ;
 		$ctn .= '&nbsp;' ;
 		$ctn .= '<a class="btn btn-4  " href="?appelleScript=listeMembres" style = "  
-		background-image: linear-gradient(to left, orange 0%, red 51%, orange 100%);
+		background-image: linear-gradient(to left, #FF7800 0%, red 51%, #FF7800 100%);
 		background-position: left center;
 		flex: 1 1 auto;
 		margin: 10px;
@@ -111,7 +111,7 @@ end",
 		border-radius: 30px;">Membres</i></a>' ;
 		$ctn .= '&nbsp;' ;
 		$ctn .= '<a class="btn btn-4  " href="?appelleScript=listeProprietes" style = "  
-		background-image: linear-gradient(to right, orange 0%, red 51%, orange 100%);
+		background-image: linear-gradient(to left, #FF7800 0%, red 51%, #FF7800 100%);
 		background-position: right center;
 		flex: 1 1 auto;
 		margin: 10px;
@@ -137,7 +137,7 @@ end",
 		border-radius: 30px;">Variable</i></a>' ;
 		$ctn .= '&nbsp;' ;
 		$ctn .= '<a class="btn btn-5 " href="?appelleScript=listeSupervisJob" target="_supervision" style = "  
-		background-image: linear-gradient(to right, orange 0%, red 51%, orange 100%);
+		background-image: linear-gradient(to left, #FF7800 0%, red 51%, #FF7800 100%);
 		background-position: right center;
 		flex: 1 1 auto;
 		margin: 10px;

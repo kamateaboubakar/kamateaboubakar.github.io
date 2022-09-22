@@ -12,9 +12,10 @@ class APropos extends Script
 	{
 		$ctn = '' ;
 		$ctn .= '<div align="center">' ;
-		$ctn .= '<p style = "color: green">'.\Rpa2p\Config\Application::NOM.'<br>  v'.\Rpa2p\Config\Application::VERSION.'</p>' ;
+		$ctn .= '<a href="?">
+		<img src="images/logosoluci.png" height="120" href="?"/></a>' ;
 		$ctn .= '<br>' ;
-		$ctn .= '<p>Soluci RPA Manager</p>' ;
+		$ctn .= '<p style = "color: gray">'.\Rpa2p\Config\Application::NOM.'<br>  v'.\Rpa2p\Config\Application::VERSION.'</p>' ;
 		$ctn .= '<p>Copyright@2022 (SNT) Soluci Nouvelle Technologie</p>' ;
 		$ctn .= '</div>' ;
 		return $ctn ;
