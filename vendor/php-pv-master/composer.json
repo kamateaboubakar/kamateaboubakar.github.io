@@ -1,0 +1,34 @@
+{
+    "name": "php_pv/php_pv",
+    "type": "library",
+    "version": "2.0.0",
+    "description": "Librairie PHP pour vous en mettre plein la vue :D",
+    "authors": [
+        {
+            "name": "Alhassane KEITA",
+            "email": "lebdenat@yahoo.fr"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PV\\": "src/"
+        },
+        "files": [
+			"vendor/SafeHTML.php",
+			"vendor/Services_JSON.php"
+		]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PV\\": "src/"
+        },
+        "files": [
+			"vendor/SafeHTML.php",
+			"vendor/Services_JSON.php"
+		]
+    },
+    "license": "LGPL-2.1-only"
+}

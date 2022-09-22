@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.10.4 on win32)" generated="20220922 14:00:19.795" rpa="false" schemaversion="3">
+<suite id="s1" name="Instance" source="C:\xampp\htdocs\PP_RPA\work\activites\14\instance.robot">
+<test id="s1-t1" name="Search Domain" line="5">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>https://google.com</arg>
+<arg>chrome</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20220922 14:00:21.415" level="INFO">Opening browser 'chrome' to base url 'https://google.com'.</msg>
+<status status="PASS" starttime="20220922 14:00:21.414" endtime="20220922 14:00:28.799"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>5</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20220922 14:00:33.809" level="INFO">Slept 5 seconds</msg>
+<status status="PASS" starttime="20220922 14:00:28.800" endtime="20220922 14:00:33.809"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20220922 14:00:33.809" endtime="20220922 14:00:36.100"/>
+</kw>
+<status status="PASS" starttime="20220922 14:00:21.414" endtime="20220922 14:00:36.101"/>
+</test>
+<status status="PASS" starttime="20220922 14:00:19.801" endtime="20220922 14:00:36.102"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Instance">Instance</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

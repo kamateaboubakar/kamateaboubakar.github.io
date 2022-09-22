@@ -1,0 +1,21 @@
+{
+    "name": "gs2e/rpa2p",
+    "type": "project",
+    "description": "GS2E RPA Manager",
+    "license": "proprietary",
+	"autoload": {
+        "files": [
+			"vendor/php-pv-master/vendor/SafeHTML.php",
+			"vendor/php-pv-master/vendor/Services_JSON.php"
+		],
+        "psr-4": {
+			"Pv\\": "vendor/php-pv-master/src/",
+			"Alk\\": "vendor/Alk",
+			"Rpa2p\\": "lib/",
+			"Rpa2p\\Config\\": "config/"
+		}
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.5"
+    }
+}
