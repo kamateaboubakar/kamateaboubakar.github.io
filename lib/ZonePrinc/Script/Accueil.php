@@ -6,7 +6,7 @@ class Accueil extends Script
 {
 	public $NecessiteMembreConnecte = false ;
 	public $TitreDocument = "Tableau de bord" ;
-	public $Titre = "Tableau de bord" ;
+	public $Titre = " " ;
 	public function DetermineEnvironnement()
 	{
 		if(! $this->PossedeMembreConnecte())
@@ -52,11 +52,13 @@ end",
 	public function RenduSpecifique()
 	{
 		$ctn = '' ;
-		$ctn .= '<br />' ;
-		$ctn .= '<div class="card">' ;
+		//$ctn .= '<br />' ;
+		$ctn .= '<div class="card" style="border: none;">' ;
 		$ctn .= '<div class="card-body text-center">' ;
-		$ctn .= '<a class="btn btn-1 " href="?appelleScript=listeJobs" style = "  
-		background-image: linear-gradient(to left, #FF7800 0%, red 51%, #FF7800 100%);
+		$ctn .= '<a class="btn btn-outline-light " href="?appelleScript=listeJobs" style = "  
+		//background-color: #FF7800;
+		border-color: #FF7800;
+		font-family: Arial, Helvetica, sans-serif;
 		background-position: right center;
 		flex: 1 1 auto;
 		margin: 10px;
@@ -65,13 +67,15 @@ end",
 		text-transform: uppercase;
 		transition: 0.5s;
 		background-size: 200% auto;
-		color: white;
+		color: black;
 		box-shadow: 0 0 20px #eee;
-		border-radius: 30px;">Les-Jobs</i></a>' ;
+		border-radius: 30px;">Les Jobs</i></a>' ;
 		$ctn .= '&nbsp;' ;
-		$ctn .= '<a class="btn btn-2 " href="?appelleScript=listeEnvs" style = "  
-		background-image: linear-gradient(to left, #FF7800 0%, red 51%, #FF7800 100%);
-		background-position: left center;
+		$ctn .= '<a class="btn btn-outline-light " href="?appelleScript=listeEnvs" style = "  
+		//background-color: #FF7800;
+		border-color: #FF7800;
+		font-family: Arial, Helvetica, sans-serif;
+		background-position: right center;
 		flex: 1 1 auto;
 		margin: 10px;
 		padding: 20px;
@@ -79,12 +83,14 @@ end",
 		text-transform: uppercase;
 		transition: 0.5s;
 		background-size: 200% auto;
-		color: white;
+		color: black;
 		box-shadow: 0 0 20px #eee;
 		border-radius: 30px;">Environnements</i></a>' ;
 		$ctn .= '&nbsp;' ;
-		$ctn .= '<a class="btn btn-3  " href="?appelleScript=listeApps" style = "  
-		background-image: linear-gradient(to left, #FF7800 0%, red 51%, #FF7800 100%);
+		$ctn .= '<a class="btn btn-outline-light " href="?appelleScript=listeApps" style = "  
+		//background-color: #FF7800;
+		border-color: #FF7800;
+		font-family: Arial, Helvetica, sans-serif;
 		background-position: right center;
 		flex: 1 1 auto;
 		margin: 10px;
@@ -93,51 +99,14 @@ end",
 		text-transform: uppercase;
 		transition: 0.5s;
 		background-size: 200% auto;
-		color: white;
+		color: black;
 		box-shadow: 0 0 20px #eee;
 		border-radius: 30px;">Applications</i></a>' ;
 		$ctn .= '&nbsp;' ;
-		$ctn .= '<a class="btn btn-4  " href="?appelleScript=listeMembres" style = "  
-		background-image: linear-gradient(to left, #FF7800 0%, red 51%, #FF7800 100%);
-		background-position: left center;
-		flex: 1 1 auto;
-		margin: 10px;
-		padding: 20px;
-		text-transform: uppercase;
-		transition: 0.5s;
-		background-size: 200% auto;
-		color: white;
-		box-shadow: 0 0 20px #eee;
-		border-radius: 30px;">Membres</i></a>' ;
-		$ctn .= '&nbsp;' ;
-		$ctn .= '<a class="btn btn-4  " href="?appelleScript=listeProprietes" style = "  
-		background-image: linear-gradient(to left, #FF7800 0%, red 51%, #FF7800 100%);
-		background-position: right center;
-		flex: 1 1 auto;
-		margin: 10px;
-		padding: 20px;
-		text-transform: uppercase;
-		transition: 0.5s;
-		background-size: 200% auto;
-		color: white;
-		box-shadow: 0 0 20px #eee;
-		border-radius: 30px;">Propriétés</i></a>' ;
-		$ctn .= '&nbsp;' ;
-		$ctn .= '<a class="btn btn-4  " href="?appelleScript=listeVars" style = "  
-		background-image: linear-gradient(to left, orange 0%, red 51%, orange 100%);
-		background-position: left center;
-		flex: 1 1 auto;
-		margin: 10px;
-		padding: 20px;
-		text-transform: uppercase;
-		transition: 0.5s;
-		background-size: 200% auto;
-		color: white;
-		box-shadow: 0 0 20px #eee;
-		border-radius: 30px;">Variable</i></a>' ;
-		$ctn .= '&nbsp;' ;
-		$ctn .= '<a class="btn btn-5 " href="?appelleScript=listeSupervisJob" target="_supervision" style = "  
-		background-image: linear-gradient(to left, #FF7800 0%, red 51%, #FF7800 100%);
+		$ctn .= '<a class="btn btn-outline-light" href="?appelleScript=listeMembres" style = "  
+		//background-color: #FF7800;
+		border-color: #FF7800;
+		font-family: Arial, Helvetica, sans-serif;
 		background-position: right center;
 		flex: 1 1 auto;
 		margin: 10px;
@@ -146,7 +115,55 @@ end",
 		text-transform: uppercase;
 		transition: 0.5s;
 		background-size: 200% auto;
-		color: white;
+		color: black;
+		box-shadow: 0 0 20px #eee;
+		border-radius: 30px;">Membres</i></a>' ;
+		$ctn .= '&nbsp;' ;
+		$ctn .= '<a class="btn btn-outline-light" href="?appelleScript=listeProprietes" style = "  
+		//background-color: #FF7800;
+		border-color: #FF7800;
+		font-family: Arial, Helvetica, sans-serif;
+		background-position: right center;
+		flex: 1 1 auto;
+		margin: 10px;
+		padding: 20px;
+		text-align: center;
+		text-transform: uppercase;
+		transition: 0.5s;
+		background-size: 200% auto;
+		color: black;
+		box-shadow: 0 0 20px #eee;
+		border-radius: 30px;">Propriétés</i></a>' ;
+		$ctn .= '&nbsp;' ;
+		$ctn .= '<a class="btn btn-outline-light " href="?appelleScript=listeVars" style = "  
+		//background-color: #FF7800;
+		border-color: #FF7800;
+		font-family: Arial, Helvetica, sans-serif;
+		background-position: right center;
+		flex: 1 1 auto;
+		margin: 10px;
+		padding: 20px;
+		text-align: center;
+		text-transform: uppercase;
+		transition: 0.5s;
+		background-size: 200% auto;
+		color: black;
+		box-shadow: 0 0 20px #eee;
+		border-radius: 30px;">Variable</i></a>' ;
+		$ctn .= '&nbsp;' ;
+		$ctn .= '<a class="btn btn-outline-light" href="?appelleScript=listeSupervisJob" target="_supervision" style = "  
+		//background-color: #FF7800;
+		border-color: #FF7800;
+		font-family: Arial, Helvetica, sans-serif;
+		background-position: right center;
+		flex: 1 1 auto;
+		margin: 10px;
+		padding: 20px;
+		text-align: center;
+		text-transform: uppercase;
+		transition: 0.5s;
+		background-size: 200% auto;
+		color: black;
 		box-shadow: 0 0 20px #eee;
 		border-radius: 30px;">Supervision</i></a>' ;
 		$ctn .= '</div>' ;
