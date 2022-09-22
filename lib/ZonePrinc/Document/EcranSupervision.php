@@ -17,20 +17,26 @@ class EcranSupervision extends Document
 		$ctn .= '<div class="row">
 <div class="col-sm-6 col-12 d-flex justify-content-start">
 <h1 class="text-left">
-<img src="images/logo-robotframework.png" height="48" />
+<img src="images/amblemesoluci.png" height="120" href="?"/></a>
 '.htmlentities(\Rpa2p\Config\Application::NOM).'
 </h1>
 </div>
-<div class="col-sm-6 col-12 d-flex justify-content-end p-1">'.PHP_EOL ;
+<div class="col-sm-6 col-12 d-flex justify-content-end p-4">'.PHP_EOL ;
 		$ctn .= '<div class="dropdown">
-<button class="btn btn-outline-primary dropdown-toggle" type="button" id="membreConnecteMenu" data-bs-toggle="dropdown" aria-expanded="false">' ;
+<button class="btn btn-dark dropdown-toggle" style ="
+background: #FF7800; 
+border-radius: 30px;
+padding: 20px;
+border: none;
+text-align: center;
+" type="button" id="membreConnecteMenu" data-bs-toggle="dropdown" aria-expanded="false">' ;
 		if($zone->SurScriptConnecte())
 		{
 			$ctn .= htmlentities($zone->LoginMembreConnecte())." / ".htmlentities($zone->TitreProfilConnecte()) ;
 		}
 		else
 		{
-			$ctn .= 'Inconnu' ;
+			$ctn .= 'Connexion' ;
 		}
 		$ctn .= '</button>'.PHP_EOL ;
 		$ctn .= '<ul class="dropdown-menu" aria-labelledby="membreConnecteMenu">'.PHP_EOL ;
