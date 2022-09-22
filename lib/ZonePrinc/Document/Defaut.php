@@ -116,7 +116,7 @@ text-align: center;
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 <li class="nav-item">
-  <a class="nav-link" aria-current="page" href="#" style="color: #ffffff; font-size:20px;">Accueil</i></a>
+  <a class="nav-link" aria-current="page" href="https://soluci.com" style="color: #ffffff; font-size:20px;">Accueil</i></a>
 </li>
 ' ;
 	if($zone->SurScriptConnecte())
@@ -218,7 +218,7 @@ text-align: center;
 	</li>' ;
 		}
 	}
-	$ctn .= '<li class="nav-item dropdown">
+	$ctn .= '<li class="nav-text dropdown">
   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color: #ffffff; font-size:20px;" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 	Aide
   </a>
@@ -231,6 +231,7 @@ text-align: center;
 	$ctn .= ' <li><a class="dropdown-item" href="javascript:ouvreUrlModal(\'?appelleScript=aPropos\')">A propos</a></li>
   </ul>
 </li>' ;
+
 	$ctn .= '</ul>
 </div>
 </div>
@@ -242,6 +243,7 @@ text-align: center;
 
 		$ctn .= '<div class="row">
 <div class="col">' ;
+$ctn .= '<br>';
 		return $ctn ;
 	}
 	public function RenduPied(& $zone)
